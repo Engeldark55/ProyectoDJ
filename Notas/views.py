@@ -22,7 +22,13 @@ def ConfimacionTarea(request, pk):
     return redirect('Notas:notas_index')
 
 def AñadirTarea(req):
-    NuevoForm = TareaForm
+    if req.method == "POST":
+        NuevoForm = TareaForm(req.POST)
+        if NuevoForm.is_valid():
+            NuevoForm.save()
+            return redirect('Notas:notas_index')
+    else:
+        NuevoForm = TareaForm()
     context = {
         'titulo': 'Recordatorios.',
         'form':NuevoForm

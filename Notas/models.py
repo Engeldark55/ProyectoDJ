@@ -8,7 +8,7 @@ class Tarea(models.Model):
                     ]
     nombre = models.CharField(verbose_name="nombre  de la tarea: ", max_length=50)
     descripcion = models.TextField(verbose_name="sobre que trata...")
-    estado = models.CharField(verbose_name= 'Estado: ',choices=ESTADO_CHOICES, max_length=50, default=False)
+    estado = models.CharField(verbose_name= 'Estado: ',choices=ESTADO_CHOICES, max_length=50, default="not ok")
     creado = models.DateTimeField(verbose_name='creado el dia: ', auto_now=False, auto_now_add=True)
     class Meta:
         verbose_name = ("Tarea")

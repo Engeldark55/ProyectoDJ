@@ -28,12 +28,14 @@
         <main>
                 <h7>Todas Las Notas De Hoy: {{fecha}}</h7>
                 <hr>
-                <div class="listado">
+                <div class="listado overflow-auto">
                     <ul>
                         {% for tarea in lista %}
-                        <form action = "{% url "Notas:confimar_tarea"   tarea.id %}" method='POST'>
+                        <form class="d-flex justify-content-center w-100" action = "{% url "Notas:confimar_tarea"   tarea.id %}" method='POST'>
                             {% csrf_token %}
-                            <li>{{tarea}}</li> <button type="submit" class="btn btn-danger mb-3">Eliminar</button>    
+                            <li class="w-75"><span class="text-primary">{{tarea.nombre}}</span>: <span class="text-secondary">{{tarea.descripcion}}</span></li> 
+                            
+                            <button type="submit" class="btn btn-success mb-3 d-flex justify-content-end">Listo</button>    
                         </form>
                         {% endfor %}
                         

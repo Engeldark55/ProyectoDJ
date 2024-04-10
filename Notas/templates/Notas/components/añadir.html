@@ -1,10 +1,25 @@
 {% extends "Notas/index.html" %}
+{% load static %}
 
 {% block contenedor %}
 <div id="nuevo">
     <h7>Añadir una Nueva Nota. </h7>
-    <form>
-        {{form}}
+    <form  class="d-flex justify-content-center" action = "{% url "Notas:nuevo" %}" method='POST' id="formulario_agragar" >
+        {% csrf_token %}
+        <div class="form-floating m-3 ">
+            <div type="text" class="form-control shadow-lg p-3 mb-5 bg-body rounded" id="floatingInput" placeholder="Nombre">
+                {{form.nombre}}
+            </div>
+            <label for="floatingInput" >Nombre: </label>
+        </div>
+        <div class="form-floating">
+            <div class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">
+                {{form.descripcion}}
+            </div>
+            <label for="floatingTextarea2">Comments</label>
+        </div>
+
+        <button type="submit" class="btn btn-success mb-3">Guardar</button>    
     </form>
 </div>
 {% endblock contenedor %}
