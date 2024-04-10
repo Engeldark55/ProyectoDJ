@@ -1,33 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" media="screen">
     </head>
+    <body>    
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                <img src="https://png.pngtree.com/png-clipart/20191121/original/pngtree-user-icon-png-image_5097430.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <a class="navbar-brand" href="{% url "Notas:notas_index" %}">
+                <img src="https://thumbs.dreamstime.com/b/icono-de-l%C3%ADnea-notificaci%C3%B3n-usuario-se%C3%B1al-recordatorio-timbre-alarma-vector-s%C3%ADmbolo-alerta-mensaje-elemento-dise%C3%B1o-calidad-205469065.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
                 {{titulo}}
                 </a>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "Notas:nuevo" %}">Nuevo [+]</a>
+                    </li>
+                </ul>
             </div>
-            </nav>
-            <ul class="nav bg-black justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link {{estado}}" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{estado}}" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{estado}}" href="#">Link</a>
-                    </li>
-            </ul>
+        </nav>
+        {% block contenedor %}
+        <main>
+                <h7>Todas Las Notas De Hoy: {{fecha}}</h7>
+                <hr>
+                <div class="listado">
+                    <ul>
+                        {% for tarea in lista %}
+                        <form action = "{% url "Notas:confimar_tarea"   tarea.id %}" method='POST'>
+                            {% csrf_token %}
+                            <li>{{tarea}}</li> <button type="submit" class="btn btn-danger mb-3">Eliminar</button>    
+                        </form>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+        </main>
+        {% endblock contenedor %}
         <script src="" async defer></script>
     </body>
 </html>

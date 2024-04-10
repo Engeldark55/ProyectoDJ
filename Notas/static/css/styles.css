@@ -1,0 +1,13 @@
+nav{
+    border-bottom: 2px solid black;
+}
+.navbar{
+    padding: 5px;
+}
+main {
+    width: 500px;
+    height: 300px;
+    padding: 5px;
+    border: 1px solid rgb(11, 39, 53);
+    margin: 35px auto;
+}
